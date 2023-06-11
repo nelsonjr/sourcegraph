@@ -1,0 +1,50 @@
+.alert {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.last-checked {
+    border-left: 1px solid var(--border-color-2);
+}
+
+.versions {
+    width: 200px;
+}
+
+.upgrade-select {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    height: 32px;
+    align-items: baseline;
+}
+
+// Copied and adapted from the Wildcard LoadingSpinner component
+.loading-spinner {
+    :global(.theme-light) & {
+        --loading-spinner-outer-color: var(--gray-05);
+        --loading-spinner-inner-color: var(--gray-08);
+    }
+    :global(.theme-dark) & {
+        --loading-spinner-outer-color: var(--gray-07);
+        --loading-spinner-inner-color: var(--white);
+    }
+
+    flex-shrink: 0;
+    margin: 0.125rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    animation: loading-spinner-spin 1s linear infinite;
+    border: 2px solid var(--loading-spinner-outer-color, rgba(0, 0, 0, 0.3));
+    border-top: 2px solid var(--loading-spinner-inner-color, rgba(0, 0, 0, 1));
+}
+
+@keyframes loading-spinner-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

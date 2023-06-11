@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo, useState } from 'react'
+import React, { FunctionComponent, useEffect, useMemo, useState } from 'react'
 
 import { mdiOpenInNew, mdiCheckCircle, mdiChevronUp, mdiChevronDown, mdiCheckBold, mdiAlertOctagram } from '@mdi/js'
 import classNames from 'classnames'
@@ -35,6 +35,7 @@ import { LogOutput } from '../components/LogOutput'
 import { PageTitle } from '../components/PageTitle'
 
 import { SITE_UPDATE_CHECK, SITE_UPGRADE_READINESS } from './backend'
+import { SiteAdminUpdatesSelf } from './SiteAdminUpdatesSelf'
 
 import styles from './SiteAdminUpdatesPage.module.scss'
 
@@ -214,6 +215,8 @@ export const SiteAdminUpdatesPage: React.FC<Props> = ({ telemetryService }) => {
             <Container className="mb-3">
                 <SiteUpdateCheck />
             </Container>
+
+            <SiteAdminUpdatesSelf />
 
             <PageHeader path={[{ text: 'Readiness' }]} headingElement="h2" className="mb-3" />
             <Container className="mb-3">

@@ -41,9 +41,9 @@ func NewBeforeCreateUserHook() func(context.Context, database.DB, *extsvc.Accoun
 			// We prevent creating new users when the license is expired because we do not want
 			// all new users to be promoted as site admins automatically until the customer
 			// decides to downgrade to Free tier.
-			if info.IsExpired() {
-				return errcode.NewPresentationError("Unable to create user account: Sourcegraph license expired! No new users can be created. Update the license key in the [**site configuration**](/site-admin/configuration) or downgrade to only using Sourcegraph Free features.")
-			}
+			// if info.IsExpired() {
+			// 	return errcode.NewPresentationError("Unable to create user account: Sourcegraph license expired! No new users can be created. Update the license key in the [**site configuration**](/site-admin/configuration) or downgrade to only using Sourcegraph Free features.")
+			// }
 			licensedUserCount = int32(info.UserCount)
 		} else {
 			licensedUserCount = licensing.NoLicenseMaximumAllowedUserCount
