@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react'
 
+import { useQuery } from '@sourcegraph/http-client'
 import { Alert, Button, Container, LoadingSpinner, Select } from '@sourcegraph/wildcard'
+
+import { SiteUpdateCheckResult, SiteUpdateCheckVariables } from '../graphql-operations'
+
+import { SITE_UPDATE_CHECK } from './backend'
 
 import styles from './SiteAdminUpdatesSelf.module.scss'
 
 export const SiteAdminUpdatesSelf: React.FC = () => {
     const [showPanel, setShowPanel] = useState(false)
     const [version, setVersion] = useState()
+
+    const { data, loading, error } = useQuery<SiteUpdateCheckResult, SiteUpdateCheckVariables>(SITE_UPDATE_CHECK, {})
 
     // Add a HACK cute delayed effect
     useEffect(() => {
@@ -16,7 +23,8 @@ export const SiteAdminUpdatesSelf: React.FC = () => {
     })
 
     return (
-        <>
+        data &&
+        data.site.updateCheck.updateVersionAvailable && (
             <Container className={'mb-3'}>
                 <h4>Version Self Update</h4>
                 {!showPanel ? (
@@ -46,6 +54,6 @@ export const SiteAdminUpdatesSelf: React.FC = () => {
                     </>
                 )}
             </Container>
-        </>
+        )
     )
 }

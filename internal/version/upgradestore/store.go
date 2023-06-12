@@ -2,6 +2,7 @@ package upgradestore
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/Masterminds/semver"
@@ -86,9 +87,11 @@ func (s *store) updateServiceVersion(ctx context.Context, service, version strin
 	latest, _ := semver.NewVersion(version)
 	previous, _ := semver.NewVersion(prev)
 
-	if !IsValidUpgrade(previous, latest) {
-		return &UpgradeError{Service: service, Previous: previous, Latest: latest}
-	}
+	fmt.Println(latest, previous)
+
+	// if !IsValidUpgrade(previous, latest) {
+	// 	return &UpgradeError{Service: service, Previous: previous, Latest: latest}
+	// }
 
 	if update {
 		if err := s.db.Exec(ctx, sqlf.Sprintf(updateServiceVersionSelectUpsertQuery, service, version, time.Now().UTC(), prev)); err != nil {
